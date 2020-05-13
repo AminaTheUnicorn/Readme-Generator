@@ -1,17 +1,14 @@
-var inquirer = require("inquirer");
-var fs = require('fs');
-var generate = require("./utils/generateMarkdown");
+const  inquirer = require("inquirer");
+const  fs = require('fs');
+const  generate = require("./utils/generateMarkdown");
+
+// const writeToFile = generate.promisify(fs.writeFile);
 const questions = [
 
-    {
-        type: "input",
-        name: "badge",
-        message: "Badge:"
-    },
 
     {
         type: "input",
-        name: "Project Title",
+        name: "ProjectTitle",
         message: "Project Title:"
     },
 
@@ -23,7 +20,7 @@ const questions = [
 
     {
         type: "input",
-        name: "Table of Contents",
+        name: "TableofContents",
         message: "Table of Contents:"
     },
 
@@ -57,11 +54,16 @@ const questions = [
         message: "Tests:"
     },
 
-    {
-        type: "input",
-        name: "Questions",
-        message: "User GitHub profile picture"
+    {type: "input",
+      name: "Username",
+      message: "Enter your GitHub Username:"
     },
+
+    {
+      type: "input",
+      name: "Email",
+      message: "Enter your GitHub email:"
+    }
 ];
 
 function writeToFile(fileName, data) {
@@ -74,7 +76,8 @@ console.log("saved");
 function init() {
 inquirer.prompt(questions).then(function(response) {
 console.log(response);
-writeToFile("readme.md",generate({...response}));
+writeToFile("new-readme.md",generate({...response}));
+
 
 })
 }
